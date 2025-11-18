@@ -1,0 +1,11 @@
+{
+  "name": "Clampa",
+  "status": "Connected",
+  "location": {
+    "x":30, 
+    "y": -95}, 
+  "data": {
+         "color":"red", 
+         "time": "1:00"
+  }
+}

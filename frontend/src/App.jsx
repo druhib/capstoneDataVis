@@ -13,6 +13,9 @@ const App = () =>{
           <Map> 
             
           </Map>
+
+          {/* get / post request from iphone, 
+          get request  */}
        
       </div>
     </>
@@ -24,3 +27,14 @@ const App = () =>{
 
 export default App
 
+// fetch('https://mywebsite.com/endpoint/', {
+//   method: 'POST',
+//   headers: {
+//     'Accept': 'application/json',
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify({
+//     firstParam: 'yourValue',
+//     secondParam: 'yourOtherValue',
+//   })
+// })
