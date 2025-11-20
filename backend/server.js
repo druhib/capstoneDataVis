@@ -41,10 +41,15 @@ app.get('/api/nodes/get', (req, res) => {
 // POST endpoint
 app.post('/api/nodes/post', (req, res) => {
     //add checking id, if in node, replace, else append
+
+    const { UUID, advName, sensorData } = req.body 
     const newNode = {
         id: nodes.length + 1,
-        ...req.body
+        UUID: UUID.trim(),
+        advName: advName.trim(),
+        sensorData: sensorData.trim(),
     };
+    
     nodes.push(newNode);
     res.json(newNode);
 });
