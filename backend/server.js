@@ -27,19 +27,19 @@ app.get('/', (req, res) => {
     res.json({ 
         message: "Server is running!",
         endpoints: {
-            getNodes: "GET /api/nodes",
-            addNode: "POST /api/nodes"
+            getNodes: "GET /api/nodes/get",
+            addNode: "POST /api/nodes/post"
         }
     });
 });
 
 // GET endpoint
-app.get('/api/nodes', (req, res) => {
+app.get('/api/nodes/get', (req, res) => {
     res.json(nodes);
 });
 
 // POST endpoint
-app.post('/api/nodes', (req, res) => {
+app.post('/api/nodes/post', (req, res) => {
     //add checking id, if in node, replace, else append
     const newNode = {
         id: nodes.length + 1,

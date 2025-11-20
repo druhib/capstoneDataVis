@@ -107,7 +107,7 @@ const [error, setError] = useState<string | null>(null);
 
 useEffect(() => {
     setLoading(true);
-    fetch('https://zmh0kzfk-5173.use.devtunnels.ms/api/nodes')
+    fetch('https://6fxwjs58-5173.use.devtunnels.ms/api/nodes/get')
         .then(response => {
             console.log('Response status:', response.status);
             console.log('Response ok:', response.ok);
