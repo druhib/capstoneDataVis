@@ -16,9 +16,9 @@ app.use(cors({
 
 // Your nodes data
 let nodes = [
-    { id: 1, name: "Node 1", position: [32, -99] },
-    { id: 2, name: "Node 2", position: [31, -101] },
-    { id: 3, name: "Node 3", position: [31, -94] }
+    // { id: 1, name: "Node 1", position: [32, -99] },
+    // { id: 2, name: "Node 2", position: [31, -101] },
+    // { id: 3, name: "Node 3", position: [31, -94] }
 ];
 
 app.get('/', (req, res) => {
