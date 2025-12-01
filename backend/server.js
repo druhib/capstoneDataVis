@@ -6,15 +6,13 @@ const PORT = 5173;
 // Enable CORS for your React app
 // app.use(cors());
 // app.use(express.json());
+app.use(express.json());
 
 app.use(cors({
     origin: '*', // Allow all origins (for development)
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
-
-app.use(express.json());
-
 
 // Your nodes data
 let nodes = [
@@ -41,17 +39,17 @@ app.get('/api/nodes/get', (req, res) => {
 // POST endpoint
 app.post('/api/nodes/post', (req, res) => {
     //add checking id, if in node, replace, else append
-
-    const { UUID, advName, sensorData } = req.body 
+    const body = req.body
+    const { UUID, advertisingName, data } = body
     const newNode = {
         id: nodes.length + 1,
         UUID: UUID.trim(),
-        advName: advName.trim(),
-        sensorData: sensorData.trim(),
+        advertisingName: advertisingName.trim(),
+        data: data.trim(),
     };
     
     nodes.push(newNode);
-    res.json(newNode);
+    res.status(200).json(newNode);
 });
 
 
