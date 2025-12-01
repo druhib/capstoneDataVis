@@ -39,7 +39,8 @@ app.get('/api/nodes/get', (req, res) => {
 // POST endpoint
 app.post('/api/nodes/post', (req, res) => {
     //add checking id, if in node, replace, else append
-    const body = req.body
+    const body = req.body;
+    console.log(body);
     const { UUID, advertisingName, data } = body
     const newNode = {
         id: nodes.length + 1,
