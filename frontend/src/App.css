@@ -40,3 +40,33 @@
 .read-the-docs {
   color: #888;
 }
+
+/* still using this format for legend */
+#legend {
+  width: 14rem ;
+  height: 'auto'; 
+  padding-left: 1rem;
+  background-color: #f0f0f093;
+  /* overflow-y: auto; Enable scrolling if legend content is long */
+}
+
+#legend h3 {
+  margin-top: 0.7rem;
+  margin-bottom: 0.2rem; 
+  font-size: 1rem;
+  padding-left: 0.5rem;
+  text-align: left;
+}
+
+#legend ul {
+  list-style: none; /* Remove default list bullets */
+  padding: 0;
+}
+
+#legend li {
+  /* margin-bottom: 0.2rem; */
+  display: flex; /* Use flexbox for legend item layout */
+  align-items: center; /* Vertically align items */
+ 
+}
+
