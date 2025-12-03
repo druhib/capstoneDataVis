@@ -87,14 +87,14 @@ const ReloadTable: React.FC<ReloadTableProps> = ({nodeData}) => {
 
   
 
-  const start = () => {
-    setLoading(true);
-    // ajax request after empty completing
-    setTimeout(() => {
-      setSelectedRowKeys([]);
-      setLoading(false);
-    }, 1000);
-  };
+  // const start = () => {
+  //   setLoading(true);
+  //   // ajax request after empty completing
+  //   setTimeout(() => {
+  //     setSelectedRowKeys([]);
+  //     setLoading(false);
+  //   }, 1000);
+  // };
 
  
   // const rowSelection: TableRowSelection<DataType> = {
@@ -106,13 +106,10 @@ const ReloadTable: React.FC<ReloadTableProps> = ({nodeData}) => {
 
   return (
     <Flex gap="middle" vertical>
-      <Flex align="center" gap="middle">
-        <Button type="primary" onClick={start}  loading={loading}>
-          Reload
-        </Button>
+      {/* <Flex align="center" gap="middle">
         {hasSelected ? `Selected ${selectedRowKeys.length} items` : null}
-      </Flex>
-      <Table<DataType>  columns={columns} dataSource={dataSource} size = 'small' />
+      </Flex> */}
+      <Table<DataType>  columns={columns} dataSource={dataSource}  />
     </Flex>
   );
 };

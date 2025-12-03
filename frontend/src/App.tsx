@@ -5,6 +5,7 @@ import './App.css'
 import ReloadTable from './components/ReloadTable';
 // import NodeData from './components/types'
 import { Dropdown } from 'antd';
+import { Button, Select } from 'antd';
 
 interface NodeData {
     id: string;
@@ -25,12 +26,26 @@ interface NodeData {
 }
 
 
+
+
 const App = () =>{
 
 
-  const [nodeData, setNodeData] = useState<NodeData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+
+
+const [nodeData, setNodeData] = useState<NodeData[]>([]);
+const [loading, setLoading] = useState(true); // changed from true 
+const [error, setError] = useState<string | null>(null);
+const [reloadButton, setReloadButton] = useState(false);
+
+//AI generated 
+const [selectedNode, setSelectedNode] = useState<string | null>(null);
+
+
+const start = () => {
+    setReloadButton(!reloadButton);
+  };
+
   
   useEffect(() => {
       setLoading(true);
@@ -52,18 +67,56 @@ const App = () =>{
               setError(err.message);
               setLoading(false);
           });
-  }, []);
+  }, [reloadButton]);
+
+  //AI generated 
+  // Filter data based on selected node
+    const filteredData = selectedNode 
+        ? nodeData.filter(node => node.advertisingName === selectedNode)
+        : nodeData;
+
+    // Create dropdown options from node names
+    const dropdownOptions = [
+        { value: null, label: 'Select Node' },
+        ...nodeData.map(node => ({
+            value: node.advertisingName,
+            label: node.advertisingName
+        }))
+    ];
+
+
 
   return (
     <>
-     <div style={ { display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-     
-        <MapPage nodeData ={nodeData}/> 
-       
-        <div style = {{ width: "50%", }}>
-            <ReloadTable nodeData ={nodeData}  /> 
-        </div>
+     <div style={ { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: "1rem" }}>
+        <div> 
 
+        <Select
+            style={{ width: 200, position: 'absolute',  right: '150px', bottom: '-400px', margin: "1rem"}}
+            placeholder="Select a node"
+            value={selectedNode}
+            onChange={setSelectedNode}
+            options={dropdownOptions}
+        />
+        <Button type="primary"  onClick={start} loading={loading} style = {{position: 'absolute',  right: '50px', bottom: '-385px'}}> 
+                Reload Data
+        </Button>
+
+        </div>   
+        <MapPage nodeData ={nodeData}/> 
+     
+     
+        
+        <div style ={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '2rem', width: '80%', marginTop: '2rem' }}> 
+            
+            <div>
+            
+                <ReloadTable nodeData ={filteredData}  /> 
+            </div>
+       
+
+        </div>
+       
           
       </div>
     </>
@@ -75,14 +128,3 @@ const App = () =>{
 
 export default App
 
-// fetch('https://mywebsite.com/endpoint/', {
-//   method: 'POST',
-//   headers: {
-//     'Accept': 'application/json',
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify({
-//     firstParam: 'yourValue',
-//     secondParam: 'yourOtherValue',
-//   })
-// })

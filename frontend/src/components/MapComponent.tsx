@@ -229,26 +229,7 @@ const MapComponent: React.FC<MapProps> = ({ nodeData }) => {
                 </Popup>
             </Marker> */}
         </MapContainer>
-        <div>
-                <h2> Historical Node data:</h2>
-                <p>
-                    {nodeData.map((node:NodeData) => (
-                        <div style ={{display:"flex", justifyContent:"left"}} key={node.id}>
-                            <h3>Node ID: {node.id} - {node.advertisingName}</h3>
-                            <p> NodeUUID: {node.UUID}</p>
-                            <p>Temperature Data: {node.data.temp.join(', ')}</p>
-                            <p>Humidity Data: {node.data.humidity.join(', ')}</p>
-                            <p>Gas Data: {node.data.gas.join(', ')}</p>
-                            <p>X-Acceleration Data: {node.data.accelX.join(', ')}</p>
-                            <p>Y-Acceleration Data: {node.data.accelY.join(', ')}</p>
-                            <p>Z-Acceleration Data: {node.data.accelZ.join(', ')}</p>
-                            {/* add .join(', ') to all bc of mutiple data points, change format  */}
-                        </div>
-                    ))}  
-                </p>
-                
-
-            </div>
+        
 
         </div> 
 

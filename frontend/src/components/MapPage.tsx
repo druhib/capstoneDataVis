@@ -28,7 +28,7 @@ const mineralRanges = [
 
       "+1mil", 
       "500k - 1mil", 
-      "500k -20k ",
+      "500k - 20k ",
       "20k - 1k", 
       "1k - 1 ",
       "0",
@@ -103,10 +103,6 @@ return (
                 </ul>
             </div>
           </div>
-
-          {/* <div style = {{ width: "50%", }}>
-            <ReLoadTable  /> 
-          </div> */}
           
         </div>
 
