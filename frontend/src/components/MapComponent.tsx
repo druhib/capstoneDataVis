@@ -7,7 +7,8 @@ import features from '../data/counties_2010.json'
 import powerOutagesData from '../data/eaglei_outages_2015_Texas.json'
 import powerOutagesData2 from '../data/eaglei_outages_total_people_affected_per_county_2015_Texas.json'
 import { useState, useEffect } from "react";
-// import {NodeData} from './types.tsx'
+import {NodeData} from './types'
+
 
 interface CountyPowerOutageData {
     fips_code: number 
@@ -18,29 +19,29 @@ interface CountyPowerOutageData {
 
 }
 
-interface NodeData {
-    id: string;
-    latitude: number; 
-    longitude: number; 
-    UUID: string;
-    advertisingName: string;
-    data: {
-        temp: number[],
-        humidity: number[],
-        gas: number[],
-        accelX: number[],
-        accelY: number[],
-        accelZ: number[],
+// interface NodeData {
+//     id: string;
+//     latitude: number; 
+//     longitude: number; 
+//     UUID: string;
+//     advertisingName: string;
+//     data: {
+//         temp: number[],
+//         humidity: number[],
+//         gas: number[],
+//         accelX: number[],
+//         accelY: number[],
+//         accelZ: number[],
         
-    };
+//     };
 
-}
+// }
 
 
 
 const mapStyle = {
-        height: '40rem',
-        width: '60rem',
+        height: '36rem',
+        width: '50rem',
         margin: '0 auto',
     }
 
@@ -63,7 +64,7 @@ function onEachCounty(feature: any, data: Record<string, any>, layer: any) {
     
 
  
-    layer.bindPopup(`County: ${name} (${zipcode}) <br> Number of People: ${numPeopleNoPower != -1 ? numPeopleNoPower : "NaN"}`);
+    layer.bindPopup(`County: ${name} (${zipcode}) <br> Number of People: ${numPeopleNoPower != -1 ? numPeopleNoPower : "NaN"} `);
     
 
     
@@ -159,8 +160,8 @@ const MapComponent: React.FC<MapProps> = ({ nodeData }) => {
         <div> 
         <MapContainer
             style={mapStyle}
-            center ={[32, -99]}
-            zoom={5.5} scrollWheelZoom={true} >
+            center ={[31.5, -99]}
+            zoom={5.51} scrollWheelZoom={true} >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

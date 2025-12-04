@@ -3,27 +3,28 @@ import Map from './components/MapComponent'
 import MapPage from './components/MapPage'
 import './App.css'
 import ReloadTable from './components/ReloadTable';
-// import NodeData from './components/types'
+import {NodeData} from './components/types'
 import { Dropdown } from 'antd';
 import { Button, Select } from 'antd';
 
-interface NodeData {
-    id: string;
-    latitude: number; 
-    longitude: number; 
-    UUID: string;
-    advertisingName: string;
-    data: {
-        temp: number[],
-        humidity: number[],
-        gas: number[],
-        accelX: number[],
-        accelY: number[],
-        accelZ: number[],
-        
-    };
 
-}
+// interface NodeData {
+//     id: string;
+//     latitude: number; 
+//     longitude: number; 
+//     UUID: string;
+//     advertisingName: string;
+//     data: {
+//         temp: number[],
+//         humidity: number[],
+//         gas: number[],
+//         accelX: number[],
+//         accelY: number[],
+//         accelZ: number[],
+        
+//     };
+
+// }
 
 
 
@@ -88,8 +89,8 @@ const start = () => {
 
   return (
     <>
-     <div style={ { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: "1rem" }}>
-        <div> 
+     <div style={ { display: 'flex', flexDirection: 'column', gap: "1rem" }}>
+        {/* <div> 
 
         <Select
             style={{ width: 200, position: 'absolute',  right: '150px', bottom: '-400px', margin: "1rem"}}
@@ -102,15 +103,28 @@ const start = () => {
                 Reload Data
         </Button>
 
-        </div>   
-        <MapPage nodeData ={nodeData}/> 
+        </div>    */}
+        <MapPage nodeData ={nodeData}/>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', marginTop: '2rem', alignContent:"left", justifyContent: "left" }}>
+            <Select
+                style={{ width: 200}}
+                placeholder="Select a node"
+                value={selectedNode}
+                onChange={setSelectedNode}
+                options={dropdownOptions}
+            />
+            <Button type="primary"  onClick={start} loading={loading} > 
+                    Reload Data
+            </Button> 
+        </div>
      
      
         
-        <div style ={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '2rem', width: '80%', marginTop: '2rem' }}> 
+        <div style ={{ display: 'flex', flexDirection: 'row', alignItems:"left", justifyContent:"left", gap: '2rem', marginTop: '2rem' }}> 
             
             <div>
-            
+                <h2 style ={{textAlign:"left"}}> Sensor Data Table: {selectedNode} </h2>
+                
                 <ReloadTable nodeData ={filteredData}  /> 
             </div>
        

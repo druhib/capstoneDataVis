@@ -2,29 +2,12 @@ import React, { useState } from 'react';
 
 import { Button, Flex, Table } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
+import {NodeData} from './types'
 
-// type TableRowSelection<T extends object = object> = TableProps<T>['rowSelection'];
-
-interface NodeData {
-    id: string;
-    latitude: number; 
-    longitude: number; 
-    UUID: string;
-    advertisingName: string;
-    data: {
-        temp: number[],
-        humidity: number[],
-        gas: number[],
-        accelX: number[],
-        accelY: number[],
-        accelZ: number[],
-        
-    };
-
-}
 
 interface DataType {
-  time: number;
+  advertisingName: string;
+  time: string;
   temp: number;
   humidity: number;
   gas: number;
@@ -32,20 +15,14 @@ interface DataType {
 }
 
 const columns: TableColumnsType<DataType> = [
-  { title: 'Time', dataIndex: 'time' },
-  { title: 'Temperature  ', dataIndex: 'temp' },
-  { title: 'Humidity', dataIndex: 'humidity' },
-  { title: 'Gas', dataIndex: 'gas' },
-  { title: 'Acceleration', dataIndex: 'acceleration' },
+  { title: 'Advertising Name', dataIndex: 'advertisingName' },
+  { title: 'Time  (YY-MM-DD HH:MM:SS) ', dataIndex: 'time' },
+  { title: 'Temperature (\u00B0C)  ', dataIndex: 'temp' },
+  { title: 'Humidity (%) ', dataIndex: 'humidity' },
+  { title: 'Gas (k\u2126)', dataIndex: 'gas' },
+  { title: 'Acceleration m/s\u00B2', dataIndex: 'acceleration' },
 ];
 
-// const dataSource = nodeData.map( => ({
-//   time: 0,
-//   temp: 10,
-//   humidity: 32,
-//   gas: 12,
-//   acceleration: 10,
-// }));
 
 
 
@@ -55,6 +32,7 @@ interface ReloadTableProps {
 
 
 const ReloadTable: React.FC<ReloadTableProps> = ({nodeData}) => {
+  console.log("Reload Table Node Data Props: ", nodeData);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [loading, setLoading] = useState(false);
   console.log("Reload Table Node Data: ", nodeData);
@@ -74,42 +52,31 @@ const ReloadTable: React.FC<ReloadTableProps> = ({nodeData}) => {
       const acceleration = Math.sqrt(accelX ** 2 + accelY ** 2 + accelZ ** 2);
 
       return {
-        // key: `${node.id}-${index}`, // Unique key for each row
-        time: index,
+        
+        advertisingName: node.advertisingName,
+        time: node.time,
         temp: data.temp?.[index] ?? 0,
         humidity: data.humidity?.[index] ?? 0,
         gas: data.gas?.[index] ?? 0,
         acceleration: Number(acceleration.toFixed(2)),
-        // nodeName: node.advertisingName, // Include node identifier
+        
       };
     });
   });
 
   
 
-  // const start = () => {
-  //   setLoading(true);
-  //   // ajax request after empty completing
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 1000);
-  // };
-
- 
-  // const rowSelection: TableRowSelection<DataType> = {
-  //   selectedRowKeys,
-  //   onChange: onSelectChange,
-  // };
+  
 
   const hasSelected = selectedRowKeys.length > 0;
 
   return (
+    
     <Flex gap="middle" vertical>
       {/* <Flex align="center" gap="middle">
         {hasSelected ? `Selected ${selectedRowKeys.length} items` : null}
       </Flex> */}
-      <Table<DataType>  columns={columns} dataSource={dataSource}  />
+      <Table<DataType>  columns={columns} dataSource={dataSource}   size = "large"/>
     </Flex>
   );
 };

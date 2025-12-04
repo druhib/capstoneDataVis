@@ -16,9 +16,52 @@ app.use(cors({
 
 // Your nodes data
 let nodes = [
-    // { id: 1, name: "Node 1", position: [32, -99] },
-    // { id: 2, name: "Node 2", position: [31, -101] },
-    // { id: 3, name: "Node 3", position: [31, -94] }
+  {
+      advertisingName: 'RAK4631_UART', // different name 
+      latitude: 32.33920293063852,
+      data: {
+        accelX: [ 0 ],
+        accelY: [ 0 ],
+        accelZ: [ 0 ],
+        temp: [ 0 ],
+        humidity: [ 0 ],
+        gas: [ 0 ]
+      },
+      UUID: '4AB52D12-F6F6-BB54-23A9-6F6614ADA0F4', // different UUID 
+      time: '2025-12-03 18:06:21',
+      longitude: -96.08811190466514
+},
+
+{
+      advertisingName: 'RAK4631_Node1', // different name
+      latitude: 33.33920293063852,
+      data: {
+        accelX: [ 0 ],
+        accelY: [ 0 ],
+        accelZ: [ 0 ],
+        temp: [ 0 ],
+        humidity: [ 0 ],
+        gas: [ 0 ]
+      },
+      UUID: '4AB52D12-F6F6-BB54-23A9-6F6614ADA0F5', // different UUID
+      time: '2025-12-03 20:06:21',
+      longitude: -96.08811190466514
+}, 
+{
+      advertisingName: 'RAK4631_Node2',
+      latitude: 34.33920293063852,
+      data: {
+        accelX: [ 0 ],
+        accelY: [ 0 ],
+        accelZ: [ 0 ],
+        temp: [ 0 ],
+        humidity: [ 0 ],
+        gas: [ 0 ]
+      },
+      UUID: '4AB52D12-F6F6-BB54-23A9-6F6614ADA0F6', // different UUID
+      time: '2025-12-03 20:06:21',
+      longitude: -100.08811190466514
+}
 ];
 
 app.get('/', (req, res) => {
@@ -87,34 +130,6 @@ app.post('/api/nodes/post', (req, res) => {
   } 
 });
   
-//   if (UUID in nodes.map(n => n.UUID.trim())) {
-//      console.log("Existing node detected. Updating data...");
-//     readings.accelX.append(data.accelX); 
-//   }  
-//   else{ 
-
-//     const readings = {
-//         temp: Array.isArray(data.temp) ? data.temp : [Number(data.temp ?? 0)],
-//         humidity: Array.isArray(data.humidity) ? data.humidity : [Number(data.humidity ?? 0)],
-//         gas: Array.isArray(data.gas) ? data.gas : [Number(data.gas ?? 0)],
-//         accelX: Array.isArray(data.accelX) ? data.accelX : [Number(data.accelX ?? 0)],
-//         accelY: Array.isArray(data.accelY) ? data.accelY : [Number(data.accelY ?? 0)],
-//         accelZ: Array.isArray(data.accelZ) ? data.accelZ : [Number(data.accelZ ?? 0)]
-//     };
-
-//     const newNode = {
-//         id: nodes.length + 1,
-//         UUID: UUID.trim(),
-//         advertisingName: advertisingName.trim(),
-//         latitude: latitude,
-//         longitude: longitude,
-//         data: readings
-//     };
-
-//     nodes.push(newNode);
-//     res.status(201).json(newNode);
-//         } 
-// });
 
 
 app.listen(PORT, () => {

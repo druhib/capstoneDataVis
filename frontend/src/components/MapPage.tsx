@@ -1,25 +1,25 @@
 import { useState, useEffect, use } from "react";
 import MapComponent from "./MapComponent.tsx";
 import ReLoadTable from "./ReloadTable.tsx";
-// import {NodeData} from './types.tsx'
+import {NodeData} from './types'
 
-interface NodeData {
-    id: string;
-    latitude: number; 
-    longitude: number; 
-    UUID: string;
-    advertisingName: string;
-    data: {
-        temp: number[],
-        humidity: number[],
-        gas: number[],
-        accelX: number[],
-        accelY: number[],
-        accelZ: number[],
+// interface NodeData {
+//     id: string;
+//     latitude: number; 
+//     longitude: number; 
+//     UUID: string;
+//     advertisingName: string;
+//     data: {
+//         temp: number[],
+//         humidity: number[],
+//         gas: number[],
+//         accelX: number[],
+//         accelY: number[],
+//         accelZ: number[],
         
-    };
+//     };
 
-}
+// }
 
 // legend numbers
 const generateLegendData = (colordata: string[]) => {
@@ -51,15 +51,10 @@ interface MapPageProps {
 }
 
 const MapPage: React.FC<MapPageProps> = ({ nodeData }) => {
-    // component logic using sensorData
-//     return (
-//         // JSX
-//     );
-// };
-// const MapPage = ( sensorData:NodeData[]) => {
 
     const colordata = ["#002f61", "#005f85", "#008b98", "#00b599", "#18dc82", "#97f554", "#6a6f6bff"];
-return (
+
+    return (
     <div>
       <div> 
          <h1>InductiSense</h1>
@@ -74,16 +69,27 @@ return (
      
 
 
-        <h1>Power Outage Map - Texas Data from 2015</h1>
+        <h1>Texas LoRa Map</h1>
 
     <div style ={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: '2rem' }}>
          <MapComponent nodeData ={nodeData}/> 
 
+         <div> 
+          <p style={{ maxWidth: '300px', textAlign:"left"}}>
+            Using <span> 
+            <a href="https://smc-datachallenge.ornl.gov/eagle/" target="https://smc-datachallenge.ornl.gov/eagle/"  rel="" > EAGLE-I Outage Data 2014-2022 </a>
+
+           </span>
+            from to visualize power outages across Texas counties. The map displays the number of people experiencing power outages in each county in 2015. 
+          </p>
+
+
+
    
 
-        <div id="legend" style ={{ font: 'Inter',}}>
-                <h3><span style = {{ fontSize:"small"}}> Map Legend (Number of People)</span></h3>
-                <ul style={{ listStyleType: 'none', paddingLeft: 10, font: 'Inter', fontSize: "15px"}}>
+        <div id="legend" style ={{ font: 'Inter', marginTop: '13.5rem' }}>
+                <h3><span style = {{ fontSize:"small"}}> Map Legend <br/> Number of people experiencing power outages</span></h3>
+                <ul style={{ listStyleType: 'none', paddingLeft: 10, font: 'Inter', fontSize: "15px" }}>
                 {generateLegendData(colordata).map((item, index) => (
 
                     <li key={index}>
@@ -102,6 +108,10 @@ return (
                 ))}
                 </ul>
             </div>
+
+            </div> 
+
+
           </div>
           
         </div>
