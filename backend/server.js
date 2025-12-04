@@ -81,7 +81,7 @@ app.get('/api/nodes/get', (req, res) => {
 
 // POST endpoint
 app.post('/api/nodes/post', (req, res) => {
-  const { UUID, advertisingName, latitude, longitude, data = {} } = req.body || {};
+  const { time, UUID, advertisingName, latitude, longitude, data = {} } = req.body || {};
 
   console.log(req.body);
 
@@ -108,6 +108,7 @@ app.post('/api/nodes/post', (req, res) => {
   } else { 
     // Create new node
     const readings = {
+      originID: data.originID,
       temp: Array.isArray(data.temp) ? data.temp : [Number(data.temp ?? 0)],
       humidity: Array.isArray(data.humidity) ? data.humidity : [Number(data.humidity ?? 0)],
       gas: Array.isArray(data.gas) ? data.gas : [Number(data.gas ?? 0)],
@@ -122,6 +123,7 @@ app.post('/api/nodes/post', (req, res) => {
       advertisingName: advertisingName.trim(),
       latitude: latitude,
       longitude: longitude,
+      time: time,
       data: readings
     };
 
