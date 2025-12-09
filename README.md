@@ -23,6 +23,6 @@ note: packages installed in frontend: react-leaflet, antd
       b. after running url the data is posted on new url + "api/nodes/get"
 
 7. run backend
-   a. open a second terminal: cd to backend folder: cd backend
-   b. type: node server.js
-   c. data is posted on new url + "api/nodes/get"
+   1. open a second terminal: cd to backend folder: cd backend
+   2. type: node server.js
+   3. data is posted on new url + "api/nodes/get"
