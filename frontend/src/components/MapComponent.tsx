@@ -19,24 +19,6 @@ interface CountyPowerOutageData {
 
 }
 
-// interface NodeData {
-//     id: string;
-//     latitude: number; 
-//     longitude: number; 
-//     UUID: string;
-//     advertisingName: string;
-//     data: {
-//         temp: number[],
-//         humidity: number[],
-//         gas: number[],
-//         accelX: number[],
-//         accelY: number[],
-//         accelZ: number[],
-        
-//     };
-
-// }
-
 
 
 const mapStyle = {
@@ -71,9 +53,6 @@ function onEachCounty(feature: any, data: Record<string, any>, layer: any) {
     } 
 
 function getColor(d: number) {
-  // if (d === null || d === undefined) return '#6a6f6bff';
-// "#001685", "#3409a2", "#5000b4", "#6900be", "#8300c0", "#9d00b8", "#b800a4", "#d40081", "#ed0050", "#ff0000"
-  //"#002f61", "#005f85", "#008b98", "#00b599", "#18dc82", "#97f554", "#ffff00"
   const value = Number(d);
   return value > 1000000 ? "#002f61" :
          value > 500000 ? "#005f85" :
@@ -91,14 +70,13 @@ function style(feature: any, data: Record<string, number>) {
 
     
     const numPeopleNoPower = Number(data[zipcode]);
-    // console.log("name/zipcode/number of people w/ no power: ",name ,zipcode, ":",numPeopleNoPower)
 
     return {
-    fillColor: getColor(numPeopleNoPower),
-    weight: 2,
-    opacity: 0.7,
-    color: 'white',
-    fillOpacity: 0.7
+        fillColor: getColor(numPeopleNoPower),
+        weight: 2,
+        opacity: 0.7,
+        color: 'white',
+        fillOpacity: 0.7
     }
   };
 
@@ -116,42 +94,6 @@ const MapComponent: React.FC<MapProps> = ({ nodeData }) => {
             const fipsCode = item.fips_code.toString()
             dataMap[fipsCode] = item.sum;
         });
-
-        // const [nodeData, setNodeData] = useState(null);
-
-    // useEffect(() => {
-    //     fetch('https://zmh0kzfk-5173.use.devtunnels.ms/')
-    //         .then(response => response.json())
-    //         .then(data => setNodeData(data));
-    // }, []);
-
-// console.log("dataMap: ", dataMap)
-
-// const [nodeData, setNodeData] = useState<NodeData[]>([]);
-// const [loading, setLoading] = useState(true);
-// const [error, setError] = useState<string | null>(null);
-
-// useEffect(() => {
-//     setLoading(true);
-//     fetch('https://zmh0kzfk-5173.use.devtunnels.ms/api/nodes/get')
-//         .then(response => {
-//             console.log('Response status:', response.status);
-//             console.log('Response ok:', response.ok);
-//             if (!response.ok) throw new Error('Failed to fetch');
-//             return response.json();
-//         })
-//         .then(data => {
-//             console.log("Nodes: ", data) 
-//             setNodeData(data);
-        
-//             setLoading(false);
-//         })
-//         .catch(err => {
-//             console.log(err.message)
-//             setError(err.message);
-//             setLoading(false);
-//         });
-// }, []);
 
 
 
@@ -179,14 +121,15 @@ const MapComponent: React.FC<MapProps> = ({ nodeData }) => {
             {nodeData.map((node:NodeData) => (
                 <Marker key={node.id} position={[node.latitude, node.longitude]}>
                     <Popup>
-                        Node ID: {node.id}
+                        Node ID: {node.data.originID}
                         <br></br>
                         Advertiseing Name: {node.advertisingName}
                         <br></br>
                       
                         UUID: {node.UUID}
                         <br></br>
-                          
+                        Time: {node.time }
+                        <br></br>
                         {node.data.temp.length > 0 ? `Temp: ${node.data.temp[node.data.temp.length -1 ]}` : 'Temp: N/A'}
                         <br></br>
                         {node.data.humidity.length > 0 ? `Humidity: ${node.data.temp[node.data.temp.length -1 ]}` : 'Temp: N/A'}
@@ -203,40 +146,11 @@ const MapComponent: React.FC<MapProps> = ({ nodeData }) => {
                 </Marker>
             ))} 
 
-        
-
     
-
-            {/* <Marker position={[32, -99]}>
-                <Popup>
-                    Node 1
-                </Popup>
-            </Marker>
-
-            <Marker position={[31, -101]}>
-                <Popup>
-                Node 2
-                </Popup>
-            </Marker>
-
-            <Marker position={[31, -94]}>
-                <Popup>
-                Node 3
-                </Popup>
-            </Marker>
-            <Marker position={[31, -94]}>
-                <Popup>
-                Node 4
-                </Popup>
-            </Marker> */}
         </MapContainer>
         
 
-        </div> 
-
-        
-        
-
+        </div>
     
     
     ); 

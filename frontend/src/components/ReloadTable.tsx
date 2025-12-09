@@ -12,15 +12,23 @@ interface DataType {
   humidity: number;
   gas: number;
   acceleration: number;
+  originID: number;
+  avg_accerlation: number;
+  flag: string; 
 }
 
 const columns: TableColumnsType<DataType> = [
   { title: 'Advertising Name', dataIndex: 'advertisingName' },
+  { title: 'OriginID', dataIndex: 'originID' },
   { title: 'Time  (YY-MM-DD HH:MM:SS) ', dataIndex: 'time' },
   { title: 'Temperature (\u00B0C)  ', dataIndex: 'temp' },
   { title: 'Humidity (%) ', dataIndex: 'humidity' },
   { title: 'Gas (k\u2126)', dataIndex: 'gas' },
   { title: 'Acceleration m/s\u00B2', dataIndex: 'acceleration' },
+  { title: 'Avg Acceleration m/s\u00B2', dataIndex: 'avg_accerlation' },
+  { title: 'Acceleration Flag', dataIndex: 'flag' },
+
+
 ];
 
 
@@ -33,7 +41,7 @@ interface ReloadTableProps {
 
 const ReloadTable: React.FC<ReloadTableProps> = ({nodeData}) => {
   console.log("Reload Table Node Data Props: ", nodeData);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  
   const [loading, setLoading] = useState(false);
   console.log("Reload Table Node Data: ", nodeData);
 
@@ -49,7 +57,13 @@ const ReloadTable: React.FC<ReloadTableProps> = ({nodeData}) => {
       const accelX = data.accelX?.[index] ?? 0;
       const accelY = data.accelY?.[index] ?? 0;
       const accelZ = data.accelZ?.[index] ?? 0;
+      const accelX2 = data.accelX?.[index-1] ?? 0;
+      const accelY2 = data.accelY?.[index-1] ?? 0;
+      const accelZ2 = data.accelZ?.[index-1] ?? 0;
       const acceleration = Math.sqrt(accelX ** 2 + accelY ** 2 + accelZ ** 2);
+      const acceleration2 = Math.sqrt(accelX2 ** 2 + accelY2 ** 2 + accelZ2 ** 2);
+      
+      const avg_acceleration_calc = (acceleration2 + acceleration )/2
 
       return {
         
@@ -59,6 +73,15 @@ const ReloadTable: React.FC<ReloadTableProps> = ({nodeData}) => {
         humidity: data.humidity?.[index] ?? 0,
         gas: data.gas?.[index] ?? 0,
         acceleration: Number(acceleration.toFixed(2)),
+        originID: data.originID,
+        
+        //if acceleration 2 == 0 then print accleration otherwise avg accelaeration 
+        avg_accerlation: 
+          acceleration2 === 0 
+          ? Number(acceleration.toFixed(2)) 
+          : Number(avg_acceleration_calc.toFixed(2)),
+     
+        flag: avg_acceleration_calc >= 20 ? "red" : "green"
         
       };
     });
@@ -68,14 +91,12 @@ const ReloadTable: React.FC<ReloadTableProps> = ({nodeData}) => {
 
   
 
-  const hasSelected = selectedRowKeys.length > 0;
+
 
   return (
     
     <Flex gap="middle" vertical>
-      {/* <Flex align="center" gap="middle">
-        {hasSelected ? `Selected ${selectedRowKeys.length} items` : null}
-      </Flex> */}
+     
       <Table<DataType>  columns={columns} dataSource={dataSource}   size = "large"/>
     </Flex>
   );

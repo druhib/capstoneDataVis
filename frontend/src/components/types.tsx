@@ -5,7 +5,9 @@ export interface NodeData {
     UUID: string;
     advertisingName: string;
     time: string;
+    
     data: {
+        originID: number
         temp: number[],
         humidity: number[],
         gas: number[],

@@ -3,23 +3,6 @@ import MapComponent from "./MapComponent.tsx";
 import ReLoadTable from "./ReloadTable.tsx";
 import {NodeData} from './types'
 
-// interface NodeData {
-//     id: string;
-//     latitude: number; 
-//     longitude: number; 
-//     UUID: string;
-//     advertisingName: string;
-//     data: {
-//         temp: number[],
-//         humidity: number[],
-//         gas: number[],
-//         accelX: number[],
-//         accelY: number[],
-//         accelZ: number[],
-        
-//     };
-
-// }
 
 // legend numbers
 const generateLegendData = (colordata: string[]) => {
@@ -57,11 +40,12 @@ const MapPage: React.FC<MapPageProps> = ({ nodeData }) => {
     return (
     <div>
       <div> 
-         <h1>InductiSense</h1>
+
          <div style = {{display: "flex", flexDirection: "row", gap: "1rem", alignItems: "center", justifyContent: "center"}}>
-            <img src="clamp.png" alt="InductiSense Logo" style={{ height: "20rem" }} /> 
-            <img src="voltagereadings.png" alt="InductiSense Logo" style={{ height: "20rem" }} /> 
-            <img src="rak.png" alt="InductiSense Logo" style={{ height: "20rem" }} />
+          <h1>InductiSense</h1>
+            <img src="clamp.png" alt="InductiSense Logo" style={{ height: "15rem" }} /> 
+            <img src="rak2.png" alt="InductiSense Logo" style={{ height: "15rem" }} /> 
+           
           </div> 
 
          
@@ -69,9 +53,10 @@ const MapPage: React.FC<MapPageProps> = ({ nodeData }) => {
      
 
 
-        <h1>Texas LoRa Map</h1>
+    <h2 style ={{display: 'flex', flexDirection: 'row',justifyContent: 'left', marginLeft: "4rem" }}>Texas LoRa Map</h2>
 
     <div style ={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: '2rem' }}>
+          
          <MapComponent nodeData ={nodeData}/> 
 
          <div> 
