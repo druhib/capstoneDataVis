@@ -8,23 +8,28 @@ import { Dropdown } from 'antd';
 import { Button, Select } from 'antd';
 
 
-// interface NodeData {
-//     id: string;
-//     latitude: number; 
-//     longitude: number; 
-//     UUID: string;
-//     advertisingName: string;
-//     data: {
-//         temp: number[],
-//         humidity: number[],
-//         gas: number[],
-//         accelX: number[],
-//         accelY: number[],
-//         accelZ: number[],
-        
-//     };
+// how to run and test current code 
+// overview: run frontend, create forwarding port, then run backend 
 
-// }
+
+// 1. open terminal, cd to frontend folder : cd frontend 
+// 2. type: npm install
+// 3. type: npm build 
+// 4. type: npm run dev 
+
+// note: packages installed in frontend: react-leaflet, antd 
+
+// 5. create forwarding port 
+      // steps to enable forwarding port: 
+      // a. Ports -> Forward a Port
+      // b. Type in 5173 
+      // c. Change Visibility from Private to public 
+      // change url below so fetch is from the url connected to user forwarding port 
+      // before running back end, the webiste will be present on the url 
+
+// 6. run backend 
+    // open a second terminal: cd to backend folder: cd backend 
+    // type: node server.js 
 
 
 
@@ -50,7 +55,12 @@ const start = () => {
   
   useEffect(() => {
       setLoading(true);
-      fetch('https://6fxwjs58-5173.use.devtunnels.ms/api/nodes/get')
+      // for testing puposes we use a public forwarding port and github server. this url is subject to change based on user url 
+      // steps to enable forwarding port: 
+      // 1. Ports -> Forward a Port
+      // 2. Type in 5173 
+      // 3. Change Visibility from Private to public 
+      fetch('https://zmh0kzfk-5173.use.devtunnels.ms/api/nodes/get')
           .then(response => {
               console.log('Response status:', response.status);
               console.log('Response ok:', response.ok);
@@ -60,7 +70,7 @@ const start = () => {
           .then(data => {
               console.log("Nodes: ", data) 
               setNodeData(data);
-          
+              
               setLoading(false);
           })
           .catch(err => {
@@ -84,26 +94,13 @@ const start = () => {
             label: node.advertisingName
         }))
     ];
-
+// end of AI use here ^^ // node that advertising node is used to filter not UUID, ideally the changing origin ID would be used 
 
 
   return (
     <>
      <div style={ { display: 'flex', flexDirection: 'column', gap: "1rem" }}>
-        {/* <div> 
-
-        <Select
-            style={{ width: 200, position: 'absolute',  right: '150px', bottom: '-400px', margin: "1rem"}}
-            placeholder="Select a node"
-            value={selectedNode}
-            onChange={setSelectedNode}
-            options={dropdownOptions}
-        />
-        <Button type="primary"  onClick={start} loading={loading} style = {{position: 'absolute',  right: '50px', bottom: '-385px'}}> 
-                Reload Data
-        </Button>
-
-        </div>    */}
+        
         <MapPage nodeData ={nodeData}/>
         <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', marginTop: '2rem', alignContent:"left", justifyContent: "left" }}>
             <Select
@@ -114,7 +111,7 @@ const start = () => {
                 options={dropdownOptions}
             />
             <Button type="primary"  onClick={start} loading={loading} > 
-                    Reload Data
+                    Refresh Data
             </Button> 
         </div>
      
