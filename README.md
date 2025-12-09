@@ -23,7 +23,7 @@ note: packages installed in frontend: react-leaflet, antd
       before running back end, the website will be present on the forwarding port 
       after running url the data is posted on new url + "api/nodes/get"
 
-   6. run backend 
+6. run backend 
    open a second terminal: cd to backend folder: cd backend 
    type: node server.js 
    data is posted on new url + "api/nodes/get"
