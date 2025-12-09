@@ -2,6 +2,11 @@
 capstone data visualization 
 
 
+website: 
+
+<img width="866" height="761" alt="Screenshot 2025-12-09 at 4 35 24 PM" src="https://github.com/user-attachments/assets/e1dc4581-487f-41b6-b264-323fa6e3f3f5" />
+
+
 how to run and test current code, found on App.tsx
 overview: run frontend, create forwarding port, then run backend 
 
