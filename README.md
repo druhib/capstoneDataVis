@@ -13,8 +13,7 @@ overview: run frontend, create forwarding port, then run backend
 
 1. open terminal, cd to frontend folder : cd frontend 
 2. type: npm install
-3. type: npm build 
-4. type: npm run dev 
+3. type: npm run dev 
 
 note: packages installed in frontend: react-leaflet, antd 
 
